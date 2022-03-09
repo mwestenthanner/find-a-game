@@ -5,7 +5,7 @@ export interface Game {
     description: string
     platform: string
     xcloud: boolean
-    genre: Array<string>
+    genres: Array<string>
     score: number
     playtime: number
 }
