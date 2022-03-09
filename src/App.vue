@@ -1,27 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+<div class="app">
+  <Title />
+  <GameCard />
+</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent, ref } from 'vue';
+import Title from './components/Title.vue'
+import GameCard from './components/GameCard.vue'
 
 export default defineComponent({
-  name: 'App',
   components: {
-    HelloWorld
+    Title,
+    GameCard
+  },
+  setup() {
+
+    const count = ref(0);
+
+    return {
+        count
+    }
+
   }
-});
+})
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+body {
+  background-color: var(--dark-bg);
 }
+
 </style>

@@ -1,0 +1,10 @@
+/* RESETS */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* VARIABLES */
+:root {
+    --dark-bg: #160A45;
+}
