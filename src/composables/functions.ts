@@ -16,7 +16,7 @@ export function randomizeTagColor(name: string): string {
         color = 'purple';
         break;
       default:
-        color = 'yellow';
+        color = 'red';
     }
 
     return color;

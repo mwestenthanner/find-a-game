@@ -41,7 +41,8 @@ export default defineComponent({
         const sampleTags = [
           'Simulation',
           'Adventure',
-          'Open World'
+          'Open World',
+          'House'
         ]
 
         const store = useStore();

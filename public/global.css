@@ -10,15 +10,22 @@
 /* VARIABLES */
 :root {
     --dark-bg: #160A45;
+    --purple: #9E52BB;
+    --pink: #f05596;
+    --orange: #F7A380;
+    --red: #F65C51;
+    
+    /*
     --yellow: rgb(235, 206, 79);
     --purple: rgb(121, 13, 148);
     --pink: rgb(236, 73, 182);
     --orange: orange;
+    */
 }
 
 :root {
     --slider-connect-bg: var(--orange);
-    --slider-tooltip-bg: var(--orange);
+    --slider-tooltip-bg: var(--red);
     --slider-handle-ring-color: var(--orange);
   }
 
@@ -35,6 +42,6 @@
     background-color: var(--orange);
 }
 
-.yellow {
-    background-color: var(--yellow);
+.red {
+    background-color: var(--red);
 }
