@@ -23,12 +23,6 @@
     */
 }
 
-:root {
-    --slider-connect-bg: var(--orange);
-    --slider-tooltip-bg: var(--red);
-    --slider-handle-ring-color: var(--orange);
-  }
-
 /* GLOBAL CLASSES */
 .purple {
     background-color: var(--purple);
@@ -44,4 +38,22 @@
 
 .red {
     background-color: var(--red);
+}
+
+/* VUEFORM MODIFICATIONS */
+:root {
+    --slider-connect-bg: var(--orange);
+    --slider-tooltip-bg: var(--red);
+    --slider-handle-ring-color: var(--orange);
+    --toggle-bg-on: var(--orange);
+    --toggle-border-on: var(--orange);
+    --toggle-width: 2.5rem;
+  }
+
+.toggle-container:focus {
+    box-shadow: none !important;
+}
+
+.slider-target {
+    top: 0.5rem;
 }
