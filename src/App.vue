@@ -4,14 +4,14 @@
   <div class="filter-components">
     <div class="genre-tags">
       <h3>Choose genres</h3>
-      <GenreTags :tags="sampleTags" />
+      <GenreTags v-for="item in sampleTags" :key="item" :tag="item" ></GenreTags>
     </div>
     <div class="score-slider">
       <h3>Choose critic scores</h3>
       <Slider :sliderValue="[60, 100]" />
     </div>
     <div class="playtime-slider">
-      <h3>Choose playtime</h3>
+      <h3>Choose playtime hours</h3>
       <Slider :sliderValue="[5, 20]" />
     </div>
   </div>
@@ -26,7 +26,7 @@ import { defineComponent, ref } from 'vue';
 import Title from './components/Title.vue'
 import GameCard from './components/GameCard.vue'
 import Slider from './components/Slider.vue'
-import GenreTags from './components/GenreTags.vue'
+import GenreTags from './components/GenreTag.vue'
 import { useStore } from 'vuex';
 
 export default defineComponent({
