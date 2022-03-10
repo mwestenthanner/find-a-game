@@ -10,8 +10,50 @@
 /* VARIABLES */
 :root {
     --dark-bg: #160A45;
+    --purple: #9E52BB;
+    --pink: #f05596;
+    --orange: #F7A380;
+    --red: #F65C51;
+    
+    /*
     --yellow: rgb(235, 206, 79);
     --purple: rgb(121, 13, 148);
     --pink: rgb(236, 73, 182);
     --orange: orange;
+    */
+}
+
+/* GLOBAL CLASSES */
+.purple {
+    background-color: var(--purple);
+}
+  
+.pink {
+    background-color: var(--pink);
+}
+
+.orange {
+    background-color: var(--orange);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+/* VUEFORM MODIFICATIONS */
+:root {
+    --slider-connect-bg: var(--orange);
+    --slider-tooltip-bg: var(--red);
+    --slider-handle-ring-color: var(--orange);
+    --toggle-bg-on: var(--orange);
+    --toggle-border-on: var(--orange);
+    --toggle-width: 2.5rem;
+  }
+
+.toggle-container:focus {
+    box-shadow: none !important;
+}
+
+.slider-target {
+    top: 0.5rem;
 }

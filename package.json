@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@vueform/slider": "github:vueform/slider",
+    "@vueform/toggle": "github:vueform/toggle",
     "vue": "^3.0.0",
     "vuex": "^4.0.2"
   },

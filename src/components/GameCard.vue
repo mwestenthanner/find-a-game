@@ -10,7 +10,7 @@
       <div class="basic-info">
         <h3>{{ game.title }}</h3>
         <div class="genres">
-          <span v-for="(item, key) in game.genres" :key="key" :class="randomizeTagColor()">{{ item }}</span>
+          <span v-for="(item, key) in game.genres" :key="key" :class="randomizeTagColor(item)">{{ item }}</span>
         </div>
       </div>
     </div>
@@ -25,7 +25,8 @@
 
 <script lang="ts">
 import { Game } from '@/types';
-import { defineComponent, onMounted, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
+import { randomizeTagColor } from '@/composables/functions';
 
 export default defineComponent({
   props: {
@@ -37,13 +38,6 @@ export default defineComponent({
   setup() {
 
     let showInfo = ref(false);
-
-    function randomizeTagColor() {
-
-      const tagColors = ['purple', 'pink', 'yellow', 'orange'];
-      return tagColors[Math.floor(Math.random() * tagColors.length)];
-
-    }
 
     return {
       randomizeTagColor,
@@ -137,24 +131,6 @@ export default defineComponent({
 
 .further-info {
   display: none;
-}
-
-/* Tag colors */
-
-.purple {
-  background-color: var(--purple);
-}
-
-.pink {
-  background-color: var(--pink);
-}
-
-.orange {
-  background-color: var(--orange);
-}
-
-.yellow {
-  background-color: var(--yellow);
 }
 
 
