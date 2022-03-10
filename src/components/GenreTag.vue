@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { defineComponent } from 'vue';
   import { randomizeTagColor } from '@/composables/functions';
 
   export default defineComponent({
@@ -18,16 +18,22 @@
         function select(e: MouseEvent) {
 
             if (e) {
+
               const target = e.target as HTMLButtonElement;
+              const tagColor = randomizeTagColor(target.textContent ?? '');
 
               if (target.classList.contains('selected')) {
+
                 target.classList.remove('selected');
+                target.classList.remove(tagColor);
+
               } else {
+
                 target.classList.add('selected');
+                target.classList.add(tagColor);
+
               }
             }
-
-            console.log('hi');
 
         }
 
@@ -59,7 +65,6 @@ button {
 
 .selected {
   outline: none;
-  background-color: red;
 }
 
 
