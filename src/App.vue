@@ -1,6 +1,7 @@
 <template>
 <div class="app">
   <Title />
+  <Sort />
 
   <div class="filter-components">
     <div class="platform-tags">
@@ -38,6 +39,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import Title from './components/Title.vue'
+import Sort from './components/Sort.vue'
 import GameCard from './components/GameCard.vue'
 import Slider from './components/Slider.vue'
 import Toggle from './components/Toggle.vue'
@@ -50,7 +52,8 @@ export default defineComponent({
     GameCard,
     Slider, 
     Tag,
-    Toggle
+    Toggle,
+    Sort
   },
       setup() {
 
@@ -91,13 +94,19 @@ body {
 .app {
   padding: 6rem;
   display: grid;
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: 1fr 6fr;
   grid-template-areas: 
-    "title title title title title title title"
-    "filters games games games games games games"
+    "title sort"
+    "filters games"
 }
 
 Title {
   grid-area: title;
+}
+
+Sort {
+  grid-area: sort;
 }
 
 .filter-components {

@@ -1,7 +1,7 @@
 <template>
-<div class="title">
+<header>
     <h1>find a <span class="title-tag">game</span></h1>
-</div>
+</header>
 </template>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ export default defineComponent({
 
 <style scoped>
 
-.title {
+header {
     color: white;
     margin-bottom: 5rem;
 }
