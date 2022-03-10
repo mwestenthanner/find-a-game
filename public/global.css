@@ -10,4 +10,8 @@
 /* VARIABLES */
 :root {
     --dark-bg: #160A45;
+    --yellow: rgb(235, 206, 79);
+    --purple: rgb(121, 13, 148);
+    --pink: rgb(236, 73, 182);
+    --orange: orange;
 }
