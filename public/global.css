@@ -15,3 +15,26 @@
     --pink: rgb(236, 73, 182);
     --orange: orange;
 }
+
+:root {
+    --slider-connect-bg: var(--orange);
+    --slider-tooltip-bg: var(--orange);
+    --slider-handle-ring-color: var(--orange);
+  }
+
+/* GLOBAL CLASSES */
+.purple {
+    background-color: var(--purple);
+}
+  
+.pink {
+    background-color: var(--pink);
+}
+
+.orange {
+    background-color: var(--orange);
+}
+
+.yellow {
+    background-color: var(--yellow);
+}

@@ -1,6 +1,20 @@
 <template>
 <div class="app">
   <Title />
+  <div class="filter-components">
+    <div class="genre-tags">
+      <h3>Choose genres</h3>
+      <GenreTags :tags="sampleTags" />
+    </div>
+    <div class="score-slider">
+      <h3>Choose critic scores</h3>
+      <Slider :sliderValue="[60, 100]" />
+    </div>
+    <div class="playtime-slider">
+      <h3>Choose playtime</h3>
+      <Slider :sliderValue="[5, 20]" />
+    </div>
+  </div>
   <div class="game-card-grid">
     <GameCard v-for="item in gameList" :key="item.id" :game="item" />
   </div>
@@ -11,20 +25,31 @@
 import { defineComponent, ref } from 'vue';
 import Title from './components/Title.vue'
 import GameCard from './components/GameCard.vue'
+import Slider from './components/Slider.vue'
+import GenreTags from './components/GenreTags.vue'
 import { useStore } from 'vuex';
 
 export default defineComponent({
   components: {
     Title,
-    GameCard
+    GameCard,
+    Slider, 
+    GenreTags
   },
       setup() {
 
+        const sampleTags = [
+          'Simulation',
+          'Adventure',
+          'Open World'
+        ]
+
         const store = useStore();
-        const gameList = ref(store.state.gameList)
+        const gameList = ref(store.state.gameList);
 
         return {
-            gameList
+            gameList,
+            sampleTags
         }
 
     }
@@ -41,6 +66,17 @@ body {
 
 .app {
   padding: 8rem;
+}
+
+.filter-components {
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.filter-components h3 {
+  margin-bottom: 3rem;
 }
 
 .game-card-grid {

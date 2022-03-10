@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { Game } from '@/types';
-import { defineComponent, onMounted, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 
 export default defineComponent({
   props: {
@@ -137,24 +137,6 @@ export default defineComponent({
 
 .further-info {
   display: none;
-}
-
-/* Tag colors */
-
-.purple {
-  background-color: var(--purple);
-}
-
-.pink {
-  background-color: var(--pink);
-}
-
-.orange {
-  background-color: var(--orange);
-}
-
-.yellow {
-  background-color: var(--yellow);
 }
 
 
