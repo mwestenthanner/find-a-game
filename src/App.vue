@@ -18,7 +18,7 @@
     </div>
     <div class="playtime-slider">
       <h3>Playtime Hours</h3>
-      <Slider :initialValue="scorePlaytimeData.value" :sliderId="scorePlaytimeData.variable" />
+      <Slider :initialValue="playtimeSliderData.value" :sliderId="playtimeSliderData.variable" :max="maxPlaytime" />
     </div>
     <div class="toggle-group">
       <div class="coming-soon">
@@ -73,20 +73,21 @@ export default defineComponent({
 
     const store = useStore();
     const gameList = computed(() => store.getters.getFilteredByAll)
+    const maxPlaytime = computed(() => store.getters.getMaxPlaytime)
 
     const scoreSliderData: MutationNumberArray = {
       variable: 'score',
       value: [60, 100]
     }
 
-    const scorePlaytimeData: MutationNumberArray = {
+    const playtimeSliderData: MutationNumberArray = {
       variable: 'playtime',
       value: [0, 20]
     }
 
     onMounted(() => {
         store.commit('setSliderFilter', scoreSliderData);
-        store.commit('setSliderFilter', scorePlaytimeData);
+        store.commit('setSliderFilter', playtimeSliderData);
         store.commit('setGenreList');
     })
 
@@ -96,7 +97,8 @@ export default defineComponent({
         sampleTags,
         platforms,
         scoreSliderData,
-        scorePlaytimeData
+        playtimeSliderData,
+        maxPlaytime
     }
 
   }

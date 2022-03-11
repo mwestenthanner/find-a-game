@@ -1,4 +1,4 @@
-import { filterByAll, filterByGenres, filterByPlatform, filterByPlaytime, filterByScore, filterComingSoon, filterLeavingSoon } from '@/composables/filters';
+import { filterByAll, filterByGenres, filterByPlatform, filterByPlaytime, filterByScore, filterComingSoon, filterLeavingSoon, getMaxPlaytime } from '@/composables/filters';
 import { createStore, GetterTree, MutationTree } from 'vuex'
 import { FilterGroup, Game, MutationNumberArray, MutationBoolean } from '../types'
 
@@ -21,7 +21,7 @@ const state: State = {
       xcloud: true,
       genres: ['Adventure', 'Role-Playing', 'Simulation'],
       score: 91,
-      playtime: 100,
+      playtime: 113,
       comingSoon: false,
       leavingSoon: false
     } as Game,
@@ -86,6 +86,10 @@ const getters: GetterTree<State, State> = {
 
   getLeavingSoon(state: State) {
     return filterLeavingSoon(state.gameList, state.filters);
+  },
+
+  getMaxPlaytime(state: State) {
+    return getMaxPlaytime(state.gameList);
   }
 
 }

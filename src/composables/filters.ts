@@ -60,3 +60,17 @@ export function filterByAll(list: Array<Game>, filters: FilterGroup): Array<Game
 
 }
 
+export function getMaxPlaytime(list: Array<Game>): number {
+
+    let playtime = 0;
+
+    list.forEach(game => {
+        if (game.playtime > playtime) {
+            playtime = game.playtime;
+        }
+    });
+
+    return 10 * Math.ceil(playtime / 10);
+
+}
+
