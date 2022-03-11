@@ -14,18 +14,18 @@
     </div>
     <div class="score-slider">
       <h3>Critic Scores</h3>
-      <Slider :sliderValue="[60, 100]" />
+      <Slider :initialValue="scoreSliderData.value" :sliderId="scoreSliderData.variable" />
     </div>
     <div class="playtime-slider">
       <h3>Playtime Hours</h3>
-      <Slider :sliderValue="[5, 20]" />
+      <Slider :initialValue="scorePlaytimeData.value" :sliderId="scorePlaytimeData.variable" />
     </div>
     <div class="toggle-group">
       <div class="coming-soon">
-        <Toggle :toggleValue="false" /><span> Coming soon</span>
+        <Toggle :initialValue="false" :toggleId="'comingSoon'" /><span> Coming soon</span>
       </div>
       <div class="leaving-soon">
-        <Toggle :toggleValue="false" /><span> Leaving soon</span>
+        <Toggle :initialValue="false" :toggleId="'leavingSoon'" /><span> Leaving soon</span>
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@ import Slider from './components/Slider.vue'
 import Toggle from './components/Toggle.vue'
 import Tag from './components/Tag.vue'
 import { useStore } from 'vuex';
+import { MutationNumberArray } from './types';
 
 export default defineComponent({
   components: {
@@ -73,8 +74,20 @@ export default defineComponent({
     const store = useStore();
     const gameList = computed(() => store.getters.getFilteredByAll)
 
+    const scoreSliderData: MutationNumberArray = {
+      variable: 'score',
+      value: [60, 100]
+    }
+
+    const scorePlaytimeData: MutationNumberArray = {
+      variable: 'playtime',
+      value: [0, 20]
+    }
+
     onMounted(() => {
-      store.commit('setGenreList');
+        store.commit('setSliderFilter', scoreSliderData);
+        store.commit('setSliderFilter', scorePlaytimeData);
+        store.commit('setGenreList');
     })
 
 
@@ -82,6 +95,8 @@ export default defineComponent({
         gameList,
         sampleTags,
         platforms,
+        scoreSliderData,
+        scorePlaytimeData
     }
 
   }

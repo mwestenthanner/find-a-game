@@ -1,6 +1,6 @@
 import { filterByAll, filterByGenres, filterByPlatform, filterByPlaytime, filterByScore, filterComingSoon, filterLeavingSoon } from '@/composables/filters';
 import { createStore, GetterTree, MutationTree } from 'vuex'
-import { FilterGroup, Game } from '../types'
+import { FilterGroup, Game, MutationNumberArray, MutationBoolean } from '../types'
 
 export type State = {
   gameList: Array<Game>,
@@ -122,22 +122,13 @@ const mutations: MutationTree<State> = {
     state.filters.genres = genres;
   },
 
-  setPlaytimeFilter(state: State, playtime: Record<string, number>) {
-    state.filters.playtimeMin = playtime.playtimeMin;
-    state.filters.playtimeMax = playtime.playtimeMax;
+  setSliderFilter(state: State, data: MutationNumberArray) {
+    state.filters[data.variable + 'Min'] = data.value[0];
+    state.filters[data.variable + 'Max'] = data.value[1];
   },
 
-  setScoreFilter(state: State, score: Record<string, number>) {
-    state.filters.scoreMin = score.scoreMin;
-    state.filters.scoreMax = score.scoreMax;
-  },
-
-  setComingSoonFilter(state: State, comingSoon: boolean) {
-    state.filters.comingSoon = comingSoon;
-  },
-
-  setLeavingSoonFilter(state: State, leavingSoon: boolean) {
-    state.filters.leavingSoon = leavingSoon;
+  setToggleFilter(state: State, data: MutationBoolean) {
+    state.filters[data.variable] = data.value;
   }
 
 }

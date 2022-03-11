@@ -21,4 +21,20 @@ export interface FilterGroup {
     genres: Array<string>
     comingSoon: boolean
     leavingSoon: boolean
+    [key: string]: unknown;
+}
+
+export interface MutationBoolean {
+    variable: string
+    value: boolean
+}
+
+export interface MutationNumberArray {
+    variable: string
+    value: Array<number>
+}
+
+export interface MutationStringArray {
+    variable: string
+    value: Array<string>
 }
