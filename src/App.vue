@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, onMounted } from 'vue';
 import Title from './components/Title.vue'
 import Sort from './components/Sort.vue'
 import GameCard from './components/GameCard.vue'
@@ -55,31 +55,36 @@ export default defineComponent({
     Toggle,
     Sort
   },
-      setup() {
+  setup() {
 
-        const platforms = [
-          'Xbox',
-          'PC',
-          'Xcloud'
-        ]
+    const platforms = [
+      'Xbox',
+      'PC',
+      'Xcloud'
+    ]
 
-        const sampleTags = [
-          'Simulation',
-          'Adventure',
-          'Open World',
-          'House'
-        ]
+    const sampleTags = [
+      'Simulation',
+      'Adventure',
+      'Open World',
+      'House'
+    ]
 
-        const store = useStore();
-        const gameList = ref(store.state.gameList);
+    const store = useStore();
+    const gameList = computed(() => store.getters.getFilteredByAll)
 
-        return {
-            gameList,
-            sampleTags,
-            platforms
-        }
+    onMounted(() => {
+      store.commit('setGenreList');
+    })
 
+
+    return {
+        gameList,
+        sampleTags,
+        platforms,
     }
+
+  }
 })
 </script>
 
