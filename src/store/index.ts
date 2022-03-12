@@ -110,20 +110,29 @@ const mutations: MutationTree<State> = {
 
     state.genreList = genreList.filter(function(item, pos) {
       return genreList.indexOf(item) == pos;
-    });
+    }).sort();
 
   },
 
-  setFilters(state: State, filters: FilterGroup) {
+  setAllFilters(state: State, filters: FilterGroup) {
     state.filters = filters;
   },
 
-  setPlatformsFilter(state: State, platforms: Array<string>) {
-    state.filters.platforms = platforms;
+  setGenresFilter(state: State, genre: string) {
+    if (state.filters.genres.includes(genre)) {
+      const filtered = state.filters.genres.filter(item => item !== genre);
+      state.filters.genres = filtered;
+    } else state.filters.genres.push(genre);
+    
   },
 
-  setGenresFilter(state: State, genres: Array<string>) {
-    state.filters.genres = genres;
+  setPlatformsFilter(state: State, tag: string) {
+
+    if (state.filters.platforms.includes(tag)) {
+      const filtered = state.filters.platforms.filter(item => item !== tag);
+      state.filters.platforms = filtered;
+    } else state.filters.platforms.push(tag);
+
   },
 
   setSliderFilter(state: State, data: MutationNumberArray) {

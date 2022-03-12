@@ -6,11 +6,11 @@
   <div class="filter-components">
     <div class="platform-tags">
       <h3>Platform</h3>
-      <Tag v-for="item in platforms" :key="item" :tag="item" :icon="item.toLowerCase()" ></Tag>
+      <Tag v-for="item in platforms" :key="item" :tag="item" :icon="item.toLowerCase()" @click="platformFilter(item)"></Tag>
     </div>
     <div class="genre-tags">
       <h3>Genres</h3>
-      <Tag v-for="item in sampleTags" :key="item" :tag="item" ></Tag>
+      <Tag v-for="item in genreList" :key="item" :tag="item" @click="genreFilter(item)"></Tag>
     </div>
     <div class="score-slider">
       <h3>Critic Scores</h3>
@@ -22,10 +22,10 @@
     </div>
     <div class="toggle-group">
       <div class="coming-soon">
-        <Toggle :initialValue="false" :toggleId="'comingSoon'" /><span> Coming soon</span>
+        <Toggle :initialValue="false" :toggleId="'comingSoon'" /><span> Coming soon only</span>
       </div>
       <div class="leaving-soon">
-        <Toggle :initialValue="false" :toggleId="'leavingSoon'" /><span> Leaving soon</span>
+        <Toggle :initialValue="false" :toggleId="'leavingSoon'" /><span> Leaving soon only</span>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import Title from './components/Title.vue'
 import Sort from './components/Sort.vue'
 import GameCard from './components/GameCard.vue'
@@ -64,16 +64,10 @@ export default defineComponent({
       'Xcloud'
     ]
 
-    const sampleTags = [
-      'Simulation',
-      'Adventure',
-      'Open World',
-      'House'
-    ]
-
     const store = useStore();
     const gameList = computed(() => store.getters.getFilteredByAll)
     const maxPlaytime = computed(() => store.getters.getMaxPlaytime)
+    const genreList  = ref(store.state.genreList)
 
     const scoreSliderData: MutationNumberArray = {
       variable: 'score',
@@ -82,23 +76,32 @@ export default defineComponent({
 
     const playtimeSliderData: MutationNumberArray = {
       variable: 'playtime',
-      value: [0, 20]
+      value: [0, maxPlaytime.value]
+    }
+
+    function platformFilter(item: string) {
+      store.commit('setPlatformsFilter', item);
+    }
+
+    function genreFilter(item: string) {
+      store.commit('setGenresFilter', item);
     }
 
     onMounted(() => {
         store.commit('setSliderFilter', scoreSliderData);
         store.commit('setSliderFilter', playtimeSliderData);
-        store.commit('setGenreList');
     })
 
 
     return {
         gameList,
-        sampleTags,
         platforms,
         scoreSliderData,
         playtimeSliderData,
-        maxPlaytime
+        maxPlaytime,
+        genreList,
+        platformFilter,
+        genreFilter
     }
 
   }
@@ -133,9 +136,9 @@ Sort {
 
 .filter-components {
   grid-area: filters;
-  display: grid; 
-  grid-template-rows: repeat(5, 1fr);
-  grid-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
   padding: 3rem;
   border-radius: 1rem;
   background-color: rgba(255, 255, 255, 0.048);

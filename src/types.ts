@@ -34,7 +34,7 @@ export interface MutationNumberArray {
     value: Array<number>
 }
 
-export interface MutationStringArray {
+export interface MutationString {
     variable: string
-    value: Array<string>
+    value: string
 }
