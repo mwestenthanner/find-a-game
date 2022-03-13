@@ -7,6 +7,8 @@ export interface Game {
     genres: Array<string>
     score: number
     playtime: number
+    added: string
+    leaving: string
     comingSoon: boolean
     leavingSoon: boolean
 }

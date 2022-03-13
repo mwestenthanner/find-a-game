@@ -23,6 +23,8 @@ const state: State = {
       genres: ['Adventure', 'Role-Playing', 'Simulation'],
       score: 91,
       playtime: 113,
+      added: '2021-10-01',
+      leaving: '',
       comingSoon: false,
       leavingSoon: false
     } as Game,
@@ -36,6 +38,8 @@ const state: State = {
       genres: ['Action', 'Fantasy', 'Open World'],
       score: 96,
       playtime: 114,
+      added: '2022-01-01',
+      leaving: '',
       comingSoon: false,
       leavingSoon: true
     } as Game,
@@ -49,6 +53,8 @@ const state: State = {
       genres: ['Open World', 'Science fiction', 'Survival'],
       score: 85,
       playtime: 41,
+      added: '2021-02-01',
+      leaving: '',
       comingSoon: true,
       leavingSoon: false
     } as Game,
@@ -62,6 +68,8 @@ const state: State = {
       genres: ['Action', 'Fantasy', 'Stealth'],
       score: 81,
       playtime: 10,
+      added: '2020-08-01',
+      leaving: '',
       comingSoon: false,
       leavingSoon: false
     } as Game
