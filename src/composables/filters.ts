@@ -47,11 +47,19 @@ export function filterByGenres(list: Array<Game>, filters: FilterGroup): Array<G
 }
 
 export function filterComingSoon(list: Array<Game>, filters: FilterGroup): Array<Game> {
-    return list.filter(item => item.comingSoon == filters.comingSoon)
+
+    // if false return all, if true exclude coming soon
+
+    if (filters.comingSoon == false) {
+        return list;
+    } else     return list.filter(item => item.comingSoon == !filters.comingSoon)
+
 }
 
 export function filterLeavingSoon(list: Array<Game>, filters: FilterGroup): Array<Game> {
-    return list.filter(item => item.leavingSoon == filters.leavingSoon)
+    if (filters.leavingSoon == false) {
+        return list;
+    } else     return list.filter(item => item.leavingSoon == !filters.leavingSoon)
 }
 
 export function filterByAll(list: Array<Game>, filters: FilterGroup): Array<Game> {

@@ -22,10 +22,10 @@
     </div>
     <div class="toggle-group">
       <div class="coming-soon">
-        <Toggle :initialValue="false" :toggleId="'comingSoon'" /><span> Coming soon only</span>
+        <Toggle :initialValue="false" :toggleId="'comingSoon'" /><span> Exclude coming soon</span>
       </div>
       <div class="leaving-soon">
-        <Toggle :initialValue="false" :toggleId="'leavingSoon'" /><span> Leaving soon only</span>
+        <Toggle :initialValue="false" :toggleId="'leavingSoon'" /><span> Exclude leaving soon</span>
       </div>
     </div>
   </div>
