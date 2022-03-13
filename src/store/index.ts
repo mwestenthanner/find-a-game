@@ -72,37 +72,7 @@ const state: State = {
       leaving: '',
       comingSoon: false,
       leavingSoon: false
-    } as Game,
-
-    {
-      id: 385013728354,
-      title: 'Subnautica',
-      img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1iqw.png',
-      description: 'Descend into the depths of an alien underwater world filled with wonder and peril. Craft equipment, pilot submarines and out-smart wildlife to explore lush coral reefs, volcanoes, cave systems, and more, all while trying to survive.',
-      platform: ['Xbox'],
-      genres: ['Open World', 'Science fiction', 'Survival'],
-      score: 85,
-      playtime: 41,
-      added: '2021-02-01',
-      leaving: '',
-      comingSoon: true,
-      leavingSoon: false
-    } as Game,
-
-    {
-      id: 385032429054,
-      title: 'A Plague Tale: Innocence',
-      img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1lat.png',
-      description: 'A Plague Tale: Innocence, on PlayStation 4, Xbox One and PC, tells the grim story of two siblings fighting together for survival in the darkest hours of History. This new video game from Asobo Studio sends you on an emotional journey through the 14th century France, with gameplay combining adventure, action and stealth, supported by a compelling story. Follow the young Amicia and her little brother Hugo, who face the brutality of a ravaged world as they discover their purpose to expose a dark secret. On the run from the Inquisition\'s soldiers, surrounded by unstoppable swarms of rats incarnating the Black Death, Amicia and Hugo will learn to know and trust each other as they struggle for their lives against all odds.',
-      platform: ['Xbox', 'Xcloud'],
-      genres: ['Action', 'Fantasy', 'Stealth'],
-      score: 81,
-      playtime: 10,
-      added: '2020-08-01',
-      leaving: '',
-      comingSoon: false,
-      leavingSoon: false
-    } as Game,
+    } as Game
 
   ],
 
