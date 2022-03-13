@@ -31,7 +31,22 @@
   </div>
 
   <div class="game-card-grid">
-    <GameCard v-for="item in gameList" :key="item.id" :game="item" />
+    <TransitionGroup name="list">
+    <div class="wrapper" v-for="(item, key) in gameList" :key="item.id">
+      <GameCard  :game="item" @toggle="e => addCard(e, key)" />
+      <div class="further-info" v-if="selectedGame == key">
+        <div class="list-item">
+          <p>{{ item.description }}</p>
+        </div>
+        <div class="list-item">
+          <span class="descriptor">Average playtime: </span><span>{{ item.playtime }} hours</span>
+        </div>
+        <div class="list-item">
+          <span class="descriptor">Critic score: </span><span>{{ item.score }} / 100</span>
+        </div>
+      </div>
+    </div>
+    </TransitionGroup>
   </div>
 </div>
 </template>
@@ -69,6 +84,8 @@ export default defineComponent({
     const maxPlaytime = computed(() => store.getters.getMaxPlaytime)
     const genreList  = ref(store.state.genreList)
 
+    const selectedGame = ref(-1);
+
     const scoreSliderData: MutationNumberArray = {
       variable: 'score',
       value: [60, 100]
@@ -87,6 +104,14 @@ export default defineComponent({
       store.commit('setGenresFilter', item);
     }
 
+    function addCard(e: Event, key: number) {
+
+      if(selectedGame.value == -1) {
+        selectedGame.value = key;
+      } else selectedGame.value = -1
+
+    }
+
     onMounted(() => {
         store.commit('setSliderFilter', scoreSliderData);
         store.commit('setSliderFilter', playtimeSliderData);
@@ -100,8 +125,10 @@ export default defineComponent({
         playtimeSliderData,
         maxPlaytime,
         genreList,
+        selectedGame,
         platformFilter,
-        genreFilter
+        genreFilter,
+        addCard
     }
 
   }
@@ -120,7 +147,7 @@ body {
   padding: 6rem;
   display: grid;
   grid-template-columns: 20% 1fr;
-  grid-template-rows: 1fr 6fr;
+  grid-template-rows: 10rem 6fr;
   grid-template-areas: 
     "title sort"
     "filters games"
@@ -160,8 +187,54 @@ Sort {
   grid-gap: 2rem;
 }
 
+.fullwidth {
+  grid-column: 1 / -1;
+}
+
+.further-info .list-item {
+  margin-top: 1rem;
+}
+
+.descriptor {
+  background-color: var(--orange);
+  display: inline-block;
+  font-size: 80%;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+}
+
 .toggle-group > div {
   margin-bottom: 0.5rem;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
 }
 
 </style>

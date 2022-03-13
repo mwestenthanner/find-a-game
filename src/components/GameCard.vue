@@ -1,11 +1,11 @@
 <template>
-<div class="game-card" :style="{ backgroundImage: 'url(' + game.img + ')' }" @mouseenter="hoverInfo()" @mouseleave="hoverInfo()">
+<div class="game-card" :style="{ backgroundImage: 'url(' + game.img + ')' }" @click="setFurtherInfo($event, game)" @mouseenter="hoverInfo()" @mouseleave="hoverInfo()">
 
       <div class="flag" :class="showTag ? 'show' : 'hide'">
         <span :class="randomizeTagColor(tagText)">{{ tagText }}</span>
       </div>
 
-    <div class="on-card" :class="showInfo ? 'show' : 'hide'" @click="setFurtherInfo()">
+    <div class="on-card" :class="showInfo ? 'show' : 'hide'" >
 
       <div class="platforms">
         <svg v-if="pcIcon" id="pc-icon" version="1.1" viewBox="0 0 8.4666665 8.4666669" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs2"/><g id="layer1" transform="translate(0,-288.53332)"><path d="M 2,3 C 1.4477381,3.0000552 1.0000552,3.4477381 1,4 v 20 c 5.52e-5,0.552262 0.4477381,0.999945 1,1 h 28 c 0.552262,-5.5e-5 0.999945,-0.447738 1,-1 V 4 C 30.999945,3.4477381 30.552262,3.0000552 30,3 Z m 14,18 c 0.552285,0 1,0.447715 1,1 0,0.552285 -0.447715,1 -1,1 -0.552285,0 -1,-0.447715 -1,-1 0,-0.552285 0.447715,-1 1,-1 z m -1,5 v 1.001953 h -3.099609 c -1.334635,0.06901 -1.23112,2.070963 0.103515,2.001953 h 7.994141 c 1.334635,0 1.334635,-2.001953 0,-2.001953 H 17 V 26 Z" transform="matrix(0.26458333,0,0,0.26458333,0,288.53332)"/></g></svg>
@@ -21,20 +21,6 @@
     </div>
 </div>
 
-<Transition>
-<div class="further-info" v-if="showFurtherInfo">
-  <div class="list-item">
-    <p>{{ game.description }}</p>
-  </div>
-  <div class="list-item">
-    <span class="descriptor" :class="randomizeTagColor('Playtime')">Playtime</span><span>{{ game.playtime }} hours</span>
-  </div>
-  <div class="list-item">
-    <span class="descriptor" :class="randomizeTagColor('Critic score (IGDB)')">Critic score (IGDB)</span><span>{{ game.score }} / 100</span>
-  </div>
-</div>
-</Transition>
-
 </template>
 
 <script lang="ts">
@@ -49,10 +35,12 @@ export default defineComponent({
           required: true
       }
   },
-  setup(props) {
+  emits: [
+    'toggle'
+  ],
+  setup(props, context) {
 
     let showInfo = ref(false);
-    let showFurtherInfo = ref(false);
     let showTag = ref(false);
     let tagText = ref('');
 
@@ -82,8 +70,8 @@ export default defineComponent({
 
     }
 
-    function setFurtherInfo() {
-      showFurtherInfo.value = !showFurtherInfo.value;
+    function setFurtherInfo($event: Event, game: Game) {
+      context.emit('toggle', $event, game);
     }
 
     function setIcons() {
@@ -113,7 +101,6 @@ export default defineComponent({
       hoverInfo,
       tagText,
       showInfo,
-      showFurtherInfo,
       showTag,
       xboxIcon,
       pcIcon,
@@ -205,7 +192,7 @@ export default defineComponent({
   fill: white;
 }
 
-.genres > span, .flag > span, .descriptor {
+.genres > span, .flag > span {
   display: inline-block;
   font-size: 80%;
   padding: 0.25rem 0.5rem;
@@ -219,20 +206,5 @@ export default defineComponent({
   color: white;
   outline: 1px solid white;
 }
-
-.further-info .list-item p {
-  margin-bottom: 1rem;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
 
 </style>
