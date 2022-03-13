@@ -24,9 +24,15 @@ export function filterByPlatform(list: Array<Game>, filters: FilterGroup): Array
 
     if (filters.platforms.length == 0) {
         return list;
-      }
-  
-    return list.filter(item => filters.platforms.includes(item.platform));
+    }
+
+    return list.filter(item => {
+
+        if(filters.platforms.some(platform => item.platform.includes(platform)) == true) {
+            return true;
+        } else return false;
+
+    } );
 
 }
 
