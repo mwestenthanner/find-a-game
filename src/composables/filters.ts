@@ -60,6 +60,50 @@ export function filterByAll(list: Array<Game>, filters: FilterGroup): Array<Game
 
 }
 
+export function sortedBy(list: Array<Game>, criteria: string, down: boolean): Array<Game> {
+
+    switch (criteria) {
+        
+        case 'playtime':
+
+            if (down == false) {
+                list = list.sort((a, b) => {
+                    return a.playtime - b.playtime;
+                });
+            } else list = list.sort((a, b) => {
+                return b.playtime - a.playtime;
+            });
+
+            break;
+
+        case 'score':
+
+            if (down == false) {
+                list = list.sort((a, b) => {
+                    return a.score - b.score;
+                });
+            } else list = list.sort((a, b) => {
+                return b.score - a.score;
+            });
+
+            break;  
+            
+        default:
+
+            if (down == false) {
+                list = list.sort(
+                    (a, b) => { return a.title.localeCompare(b.title); });
+            } else list = list.sort(
+                (a, b) => { 
+                    return b.title.localeCompare(a.title);
+                });
+
+    }
+
+    return list;
+
+}
+
 export function getMaxPlaytime(list: Array<Game>): number {
 
     let playtime = 0;

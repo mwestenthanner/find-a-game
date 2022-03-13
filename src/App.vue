@@ -1,7 +1,7 @@
 <template>
 <div class="app">
   <Title />
-  <Sort />
+  <Sort @change="sort()" />
 
   <div class="filter-components">
     <div class="platform-tags">
@@ -87,6 +87,10 @@ export default defineComponent({
       store.commit('setGenresFilter', item);
     }
 
+    function sort() {
+      console.log('sorting stuff');
+    }
+
     onMounted(() => {
         store.commit('setSliderFilter', scoreSliderData);
         store.commit('setSliderFilter', playtimeSliderData);
@@ -101,7 +105,8 @@ export default defineComponent({
         maxPlaytime,
         genreList,
         platformFilter,
-        genreFilter
+        genreFilter,
+        sort
     }
 
   }
