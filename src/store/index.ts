@@ -39,7 +39,7 @@ const state: State = {
       score: 96,
       playtime: 114,
       comingSoon: false,
-      leavingSoon: false
+      leavingSoon: true
     } as Game,
 
     {
@@ -52,7 +52,7 @@ const state: State = {
       genres: ['Open World', 'Science fiction', 'Survival'],
       score: 85,
       playtime: 41,
-      comingSoon: false,
+      comingSoon: true,
       leavingSoon: false
     } as Game,
 
