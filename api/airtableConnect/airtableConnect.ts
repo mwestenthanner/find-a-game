@@ -8,7 +8,7 @@ export const handler: Handler = async () => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(airtableData),
+    body: JSON.stringify({data: airtableData}),
   };
 
 }
@@ -19,24 +19,46 @@ async function getAirtableData() {
   const {AIRTABLE_BASE_ID, AIRTABLE_API_KEY } = process.env;
 
   const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_BASE_ID);
-  const table = base('xgp');
+  const table = base('v2');
 
-  const records = await table.select().all();
+  const records = await table.select({
+    maxRecords: 20,
+    sort: [{field: "Game", direction: "asc"}]
+  }).all();
 
   const airtableData = records.map( record => {
     return {
       id: record.getId(),
       title: record.get('Game'),
-      platforms: record.get('Platforms'),
-      status: record.get('Status'),
-      added: record.get('Added Date'),
-      leaving: record.get('Leaving Date'),
-      playtime: record.get('Playtime'),
-      score: record.get('Score'),
+      img: record.get('Image'),
+      description: record.get('Description'),
+      platform: record.get('Platforms'),
       genres: record.get('Genres'),
+      score: record.get('Score'),
+      playtime: record.get('Playtime'),
+      added: record.get('Added'),
+      leaving: record.get('Removed'),
+      comingSoon: setComingSoon(record.get('Status')),
+      leavingSoon: setLeavingSoon(record.get('Status'))
     }
   });
 
   return airtableData;
 
+}
+
+function setComingSoon(status: unknown) {
+
+  if (status == 'Coming Soon') {
+    return true;
+  } else return false;
+
+}
+
+function setLeavingSoon(status: unknown) {
+
+  if (status == 'Leaving Soon') {
+    return true;
+  } else return false;
+  
 }

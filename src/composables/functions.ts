@@ -1,3 +1,5 @@
+import { Game } from "@/types";
+
 export function randomizeTagColor(name: string): string {
 
     const firstChar = name.charAt(0).toLowerCase();
@@ -22,3 +24,17 @@ export function randomizeTagColor(name: string): string {
     return color;
 
   }
+
+export function parseApiData(data: Array<unknown> ): Array<Game> {
+
+  const gameArray: Array<Game> = [];
+
+  data.forEach(item => {
+    gameArray.push(item as Game);
+  })
+
+  return gameArray;
+
+}
+
+

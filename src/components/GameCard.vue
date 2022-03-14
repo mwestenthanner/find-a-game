@@ -84,7 +84,7 @@ export default defineComponent({
         xboxIcon.value = true;
       }
 
-      if (props.game.platform.includes('Xcloud')) {
+      if (props.game.platform.includes('xCloud')) {
         xcloudIcon.value = true;
       }
 

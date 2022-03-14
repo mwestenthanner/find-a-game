@@ -36,13 +36,13 @@
       <GameCard  :game="item" @toggle="e => addCard(e, key)" />
       <div class="further-info" v-if="selectedGame == key">
         <div class="list-item">
-          <p>{{ item.description }}</p>
-        </div>
-        <div class="list-item">
           <span class="descriptor">Average playtime: </span><span>{{ item.playtime }} hours</span>
         </div>
         <div class="list-item">
-          <span class="descriptor">Critic score: </span><span>{{ item.score }} / 100</span>
+          <span class="descriptor">Critic score: </span><span>{{ Math.round(item.score) }} / 100</span>
+        </div>
+        <div class="list-item">
+          <p>{{ item.description }}</p>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onBeforeMount, onMounted, ref } from 'vue';
 import Title from './components/Title.vue'
 import Sort from './components/Sort.vue'
 import GameCard from './components/GameCard.vue'
@@ -61,6 +61,7 @@ import Toggle from './components/Toggle.vue'
 import Tag from './components/Tag.vue'
 import { useStore } from 'vuex';
 import { MutationNumberArray } from './types';
+import { parseApiData } from '@/composables/functions';
 
 export default defineComponent({
   components: {
@@ -76,7 +77,7 @@ export default defineComponent({
     const platforms = [
       'Xbox',
       'PC',
-      'Xcloud'
+      'xCloud'
     ]
 
     const store = useStore();
@@ -88,7 +89,7 @@ export default defineComponent({
 
     const scoreSliderData: MutationNumberArray = {
       variable: 'score',
-      value: [60, 100]
+      value: [0, 100]
     }
 
     const playtimeSliderData: MutationNumberArray = {
@@ -112,11 +113,23 @@ export default defineComponent({
 
     }
 
-    
+    onBeforeMount(async () => {
+      
+      const resp = await fetch('/.netlify/functions/airtableConnect');
+      const data = (await resp.json()).data;
+
+      const games = parseApiData(data);
+
+      store.commit('setGameList', games);
+      store.commit('setGenreList');
+
+    })
 
     onMounted(() => {
-        store.commit('setSliderFilter', scoreSliderData);
-        store.commit('setSliderFilter', playtimeSliderData);
+      
+      store.commit('setSliderFilter', scoreSliderData);
+      store.commit('setSliderFilter', playtimeSliderData);
+
     })
 
 
