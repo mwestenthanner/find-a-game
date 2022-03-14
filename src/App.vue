@@ -112,6 +112,8 @@ export default defineComponent({
 
     }
 
+    
+
     onMounted(() => {
         store.commit('setSliderFilter', scoreSliderData);
         store.commit('setSliderFilter', playtimeSliderData);
