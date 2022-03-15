@@ -22,7 +22,7 @@ async function getAirtableData() {
   const table = base('v2');
 
   const records = await table.select({
-    maxRecords: 20,
+    maxRecords: 75,
     sort: [{field: "Game", direction: "asc"}]
   }).all();
 

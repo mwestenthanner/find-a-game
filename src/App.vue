@@ -3,7 +3,7 @@
   <Title />
   <Sort />
 
-  <div class="filter-components">
+  <div class="filter-components sticky">
     <div class="platform-tags">
       <h3>Platform</h3>
       <Tag v-for="item in platforms" :key="item" :tag="item" :icon="item.toLowerCase()" @click="platformFilter(item)"></Tag>
@@ -164,6 +164,7 @@ body {
 .app {
   padding: 6rem;
   display: grid;
+  align-items: start;
   grid-template-columns: 20% 1fr;
   grid-template-rows: 10rem 6fr;
   grid-template-areas: 
@@ -187,6 +188,12 @@ Sort {
   padding: 3rem;
   border-radius: 1rem;
   background-color: rgba(255, 255, 255, 0.048);
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2rem;
 }
 
 .filter-components h3 {
