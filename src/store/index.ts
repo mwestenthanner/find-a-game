@@ -37,7 +37,7 @@ const state: State = {
       platform: ['PC'],
       genres: ['Action', 'Fantasy', 'Open World'],
       score: 96,
-      playtime: 114,
+      playtime: 291,
       added: '2022-01-01',
       leaving: '',
       comingSoon: false,

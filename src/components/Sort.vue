@@ -56,6 +56,7 @@ import { defineComponent, ref } from 'vue';
     justify-content: end;
     align-items: end;
     margin-bottom: 2rem;
+    height: 80%;
 }
 
 select {

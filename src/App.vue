@@ -37,10 +37,10 @@
     <div class="wrapper" v-for="(item, key) in gameList" :key="item.id">
       <GameCard  :game="item" @toggle="e => addCard(e, key)" />
       <div class="further-info" v-if="selectedGame == key">
-        <div class="list-item">
+        <div class="list-item" v-if="item.comingSoon == false">
           <span class="descriptor">Average playtime: </span><span>{{ item.playtime }} hours</span>
         </div>
-        <div class="list-item">
+        <div class="list-item" v-if="item.comingSoon == false">
           <span class="descriptor">Critic score: </span><span>{{ Math.round(item.score) }} / 100</span>
         </div>
         <div class="list-item">
@@ -208,7 +208,7 @@ Sort {
   grid-area: games;
   margin-left: 2rem;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 16rem));
   grid-gap: 2rem;
 }
 

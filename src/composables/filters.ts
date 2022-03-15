@@ -3,7 +3,7 @@ import { FilterGroup, Game } from "@/types";
 export function filterByPlaytime(list: Array<Game>, filters: FilterGroup): Array<Game> {
     return list.filter(item => {
 
-        if (item.playtime >= filters.playtimeMin && item.playtime <= filters.playtimeMax) {
+        if (item.playtime == undefined || item.playtime >= filters.playtimeMin && item.playtime <= filters.playtimeMax) {
             return true;
         } else return false;
       
@@ -125,9 +125,11 @@ export function getMaxPlaytime(list: Array<Game>): number {
     list.forEach(game => {
         if (game.playtime > playtime) {
             playtime = game.playtime;
+            console.log('Game: ' + game.title + ' / playtime:' + game.playtime)
         }
     });
 
+    console.log(10 * Math.ceil(playtime / 10))
     return 10 * Math.ceil(playtime / 10);
 
 }
