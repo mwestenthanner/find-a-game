@@ -34,7 +34,7 @@ async function getAirtableData() {
       description: record.get('Description'),
       platform: record.get('Platforms'),
       genres: record.get('Genres'),
-      score: record.get('Score'),
+      score: setScore(record.get('Score'), record.get('Metacritic')),
       playtime: record.get('Playtime'),
       added: record.get('Added'),
       leaving: record.get('Removed'),
@@ -45,6 +45,12 @@ async function getAirtableData() {
 
   return airtableData;
 
+}
+
+function setScore(score: unknown, metacritic: unknown) {
+  if (metacritic == undefined) {
+    return score;
+  } else return metacritic;
 }
 
 function setComingSoon(status: unknown) {
