@@ -37,4 +37,19 @@ export function parseApiData(data: Array<unknown> ): Array<Game> {
 
 }
 
+export function parseGenres(data: Array<Game>): Array<string> {
+
+  let genreList: Array<string> = [];
+
+  data.forEach(game => {
+    genreList = genreList.concat(game.genres);
+  });
+
+  return genreList.filter(function(item, pos) {
+    return genreList.indexOf(item) == pos;
+  }).sort();
+
+}
+
+
 

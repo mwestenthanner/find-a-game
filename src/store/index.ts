@@ -132,6 +132,10 @@ const getters: GetterTree<State, State> = {
 
   getSorted(state: State) {
     return sortedBy(state.gameList, state.sort, state.sortDirectionDown);
+  },
+  
+  getGenres(state: State) {
+    return state.genreList;
   }
 
 }
@@ -142,18 +146,8 @@ const mutations: MutationTree<State> = {
     state.gameList = games;
   },
 
-  setGenreList(state: State) {
-    
-    let genreList: Array<string> = [];
-
-    state.gameList.forEach(game => {
-      genreList = genreList.concat(game.genres);
-    });
-
-    state.genreList = genreList.filter(function(item, pos) {
-      return genreList.indexOf(item) == pos;
-    }).sort();
-
+  setGenreList(state: State, genres: Array<string>) {
+    state.genreList = genres;
   },
 
   setAllFilters(state: State, filters: FilterGroup) {

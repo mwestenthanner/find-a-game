@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, watch, ref } from 'vue';
   import { randomizeTagColor } from '@/composables/functions';
 
   export default defineComponent({

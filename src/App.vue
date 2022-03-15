@@ -10,7 +10,9 @@
     </div>
     <div class="genre-tags">
       <h3>Genres</h3>
-      <Tag v-for="item in genreList" :key="item" :tag="item" @click="genreFilter(item)"></Tag>
+      <TransitionGroup name="list">
+        <Tag v-for="item in genreList" :key="item" :tag="item" :icon="item.toLowerCase()" @click="genreFilter(item)"></Tag>
+      </TransitionGroup>
     </div>
     <div class="score-slider">
       <h3>Critic Scores</h3>
@@ -52,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, onBeforeMount, ref } from 'vue';
 import Title from './components/Title.vue'
 import Sort from './components/Sort.vue'
 import GameCard from './components/GameCard.vue'
@@ -61,7 +63,7 @@ import Toggle from './components/Toggle.vue'
 import Tag from './components/Tag.vue'
 import { useStore } from 'vuex';
 import { MutationNumberArray } from './types';
-import { parseApiData } from '@/composables/functions';
+import { parseApiData, parseGenres } from '@/composables/functions';
 
 export default defineComponent({
   components: {
@@ -82,8 +84,8 @@ export default defineComponent({
 
     const store = useStore();
     const gameList = computed(() => store.getters.getFilteredByAll)
+    const genreList = computed(() => store.getters.getGenres)
     const maxPlaytime = computed(() => store.getters.getMaxPlaytime)
-    const genreList  = ref(store.state.genreList)
 
     const selectedGame = ref(-1);
 
@@ -113,15 +115,16 @@ export default defineComponent({
 
     }
 
-    onBeforeMount(async () => {
-      
+    onBeforeMount( async () => {
+
       const resp = await fetch('/.netlify/functions/airtableConnect');
       const data = (await resp.json()).data;
 
       const games = parseApiData(data);
+      const genres = parseGenres(games);
 
       store.commit('setGameList', games);
-      store.commit('setGenreList');
+      store.commit('setGenreList', genres);
 
     })
 
@@ -135,11 +138,11 @@ export default defineComponent({
 
     return {
         gameList,
+        genreList,
         platforms,
         scoreSliderData,
         playtimeSliderData,
         maxPlaytime,
-        genreList,
         selectedGame,
         platformFilter,
         genreFilter,
