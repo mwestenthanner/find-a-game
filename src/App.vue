@@ -138,7 +138,6 @@ export default defineComponent({
 
       const games = parseApiData(data);
       const genres = parseGenres(games);
-      console.log(genres);
 
       store.commit('setGenreList', genres);
       store.commit('setGameList', games);
@@ -186,25 +185,22 @@ body {
   display: grid;
   align-items: start;
   grid-template-columns: 20% 1fr;
-  grid-template-rows: 10rem 6fr;
-  grid-template-areas: 
-    "title sort"
-    "main main"
+  grid-template-rows: 10rem 1fr;
 }
 
 main {
-  grid-area: main;
+  grid-area: 2 / 1 / 3 / 3;
   display: grid;
   align-items: start;
   grid-template-columns: 20% 1fr;
 }
 
 Title {
-  grid-area: title;
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 Sort {
-  grid-area: sort;
+  grid-area: 1 / 2 / 2 / 3;
 }
 
 .filter-components {
@@ -286,5 +282,68 @@ Sort {
 .list-leave-active {
   position: absolute;
 }
+
+@media (max-width: 115rem) { 
+
+  .sticky {
+    position: relative;
+    top: 0;
+  }
+
+ }
+
+@media (max-width: 100rem) { 
+
+  .app {
+    grid-template-columns: 30% 1fr;
+  }
+
+  main {
+    grid-template-columns: 30% 1fr;
+  }
+
+  .game-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
+  }
+
+ }
+
+@media (max-width: 64rem) {
+
+  .app {
+    grid-template-columns: 80% 1fr;
+    width: 80%;
+    padding: 6rem 10%;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+
+  .game-card-grid {
+    margin-left: 0rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .game-card-grid, .filter-components {
+    max-width: 70%;
+  }
+
+}
+
+@media (max-width: 25rem) {
+  
+  .filter-components {
+    max-width: 65%;
+  }
+
+  .game-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 100%));
+    max-width: 90%;
+  }
+
+}
+
 
 </style>
