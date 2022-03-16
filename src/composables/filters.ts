@@ -44,6 +44,10 @@ export function filterByGenres(list: Array<Game>, filters: FilterGroup): Array<G
 
     return list.filter(item => {
 
+        if (item.genres == undefined) {
+            return false;
+        }
+
         if(filters.genres.some(genre => item.genres.includes(genre)) == true) {
             return true;
         } else return false;
@@ -125,11 +129,9 @@ export function getMaxPlaytime(list: Array<Game>): number {
     list.forEach(game => {
         if (game.playtime > playtime) {
             playtime = game.playtime;
-            console.log('Game: ' + game.title + ' / playtime:' + game.playtime)
         }
     });
 
-    console.log(10 * Math.ceil(playtime / 10))
     return 10 * Math.ceil(playtime / 10);
 
 }

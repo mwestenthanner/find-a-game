@@ -21,12 +21,28 @@ async function getAirtableData() {
   const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_BASE_ID);
   const table = base('v2');
 
-  const records = await table.select({
+  /*
+  const entries = await table.select({
     maxRecords: 75,
     sort: [{field: "Game", direction: "asc"}]
   }).all();
+  */
+  
+  const entries = [];
 
-  const airtableData = records.map( record => {
+  await table.select({
+    sort: [{field: "Game", direction: "asc"}]
+  }).eachPage(function page(records, fetchNextPage) {
+  
+      records.forEach(function(record) {
+        entries.push(record);
+      });
+  
+      fetchNextPage();
+  
+  });
+
+  const airtableData = entries.map( record => {
     return {
       id: record.getId(),
       title: record.get('Game'),

@@ -98,6 +98,10 @@ const state: State = {
 
 const getters: GetterTree<State, State> = {
 
+  getAll(state: State) {
+    return state.gameList;
+  },
+
   getFilteredByAll(state: State) {
     return sortedBy(filterByAll(state.gameList, state.filters), state.sort, state.sortDirectionDown);
   },
